@@ -11,16 +11,16 @@ type ArticleProps = {
 const ArticleCard: React.FC<ArticleProps> = ({ image, date, category, title }) => (
   <article className="flex flex-col w-full max-w-3xl mx-auto">
     <div className="flex flex-col">
-      <div className="relative w-full h-[400px]">
+      {/* Maintain 1:1 aspect ratio and cover */}
+      <div className="relative w-full aspect-square">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-        
       </div>
       <div className="flex flex-col mt-8 px-2 items-start">
         <span className="uppercase text-xs tracking-widest text-neutral-500 mb-4 block font-Barlow">
