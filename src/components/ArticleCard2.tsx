@@ -6,7 +6,8 @@ type ArticleCard2Props = {
   title: string;
   category: string;
   author: string;
-  description: string;
+  description?: string; // Made optional
+  imageSize?: string; // e.g. "w-[120px] h-[120px]"
 };
 
 const ArticleCard2: React.FC<ArticleCard2Props> = ({
@@ -16,9 +17,10 @@ const ArticleCard2: React.FC<ArticleCard2Props> = ({
   category,
   author,
   description,
+  imageSize = "w-[120px] h-[120px]", // default size
 }) => {
   return (
-    <div className="flex flex-row items-start gap-2 py-5 font-montserrat h-36 overflow-hidden">
+    <div className="flex flex-row items-start gap-2 py-5 font-montserrat h-fit overflow-hidden">
       {/* Date vertical */}
       <div className="text-left text-gray-400 text-[10px] w-fit writing-mode-vertical">
         {date}
@@ -27,19 +29,21 @@ const ArticleCard2: React.FC<ArticleCard2Props> = ({
       <img
         src={image}
         alt={title}
-        className="w-[120px] h-[120px] object-cover"
+        className={`${imageSize} object-cover`}
       />
       {/* Content */}
-      <div className="flex-1 h-[120px]">
+      <div className="flex-1 h-fit">
         <div className="text-lg font-light mb-2 leading-tight">
           {title}
         </div>
         <div className="text-[10px] text-gray-400 font-light mb-1 tracking-wider">
           {category.toUpperCase()} &nbsp; BY <span className="text-[#E94F37] font-semibold">{author.toUpperCase()}</span>
         </div>
-        <div className="text-sm text-gray-600 leading-relaxed overflow-hidden">
-          {description}
-        </div>
+        {description && (
+          <div className="text-sm text-gray-600 leading-relaxed overflow-hidden">
+            {description}
+          </div>
+        )}
       </div>
       <style>
         {`
